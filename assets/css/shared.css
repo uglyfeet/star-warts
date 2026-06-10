@@ -1,0 +1,38 @@
+/* global styles */
+
+
+@import url(https://db.onlinewebfonts.com/c/c00548f5d217ed324ae9096051927001?family=STARWARS);
+
+/* CSS Variables */ 
+:root {
+    --primary-font: "STARWARS", sans-serif;
+    --primary-color:black;
+    --secondary-color:white;
+    --accent-colour: #4bd5ee;
+    --story-colour: #ffe81f;
+}
+        
+body {
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    font-family: var(--primary-font);
+}
+
+.custom-nav {
+    background-color: var(--accent-colour);
+    border-bottom: 2px solid var(--accent-colour);
+}
+
+.navbar-brand,
+.nav-link {
+    color: var(--secondary-color) !important;
+}
+
+.navbar-logo {
+	width: 30px;
+} 
+.logo-image {
+    max-width: 250px;
+    width: 100%;
+    height: auto;
+}
