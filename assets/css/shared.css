@@ -1,6 +1,6 @@
 /* global styles */
 
-
+/* Importing the Star Wars font from online web fonts */
 @import url(https://db.onlinewebfonts.com/c/c00548f5d217ed324ae9096051927001?family=STARWARS);
 
 /* CSS Variables */ 
@@ -11,7 +11,8 @@
     --accent-colour: #4bd5ee;
     --story-colour: #ffe81f;
 }
-        
+
+/* Global colours, fonts and nav bar styles */
 body {
     background: var(--primary-color);
     color: var(--secondary-color);

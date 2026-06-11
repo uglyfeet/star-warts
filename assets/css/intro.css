@@ -7,6 +7,7 @@ body {
     font-family: var(--primary-font);  
 }
 
+/* Gradient overlay */
 body::after {
 	content: "";
 	position: fixed;
@@ -23,6 +24,7 @@ body::after {
 	z-index: 1;
 }
 
+/* Stars */
 .stars {
 	position: absolute;
 	width: 1px;
@@ -31,6 +33,7 @@ body::after {
 	z-index: 2;
 }
 
+/* Intro text */
 .intro {
 	position: absolute; 
 	top: 50%; 
@@ -46,6 +49,7 @@ body::after {
 	animation: intro 6s ease-out 0.5s;
 }
 
+/* fading and scaling animations */
 @keyframes intro {
 	0% {
 		opacity: 0;
@@ -61,6 +65,7 @@ body::after {
 	}
 }
 
+/* The Star Wars logo */
 .logo {
 	position: absolute;
 	top: 50%;
@@ -76,6 +81,7 @@ body::after {
 	width: inherit;
 }
 
+/* fading and scaling animations */
 @keyframes logo {
 	0% {
 		opacity: 1;
@@ -95,6 +101,7 @@ p {
 	color: var(--story-colour);
 }
 
+/* Scroller */
 #scroller {
 	font-family: sans-serif;
 	font-weight: bold;
@@ -126,6 +133,7 @@ p {
 	animation: scoller 100s linear 16s;
 }
 
+/* Scrolling animation */
 @keyframes scoller {
 	0% {
 		top: 100%;
