@@ -18,6 +18,13 @@ body {
     margin-bottom: 30px;
 }
 
+/* Laser */
+.laser {
+    position: absolute;
+    width: 4px;
+    height: 20px;
+    background-color: red;
+}
 /* Controls panel */
 #controls-panel {
     text-align: center;
