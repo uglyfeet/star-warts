@@ -21,8 +21,8 @@ body {
 /* Laser */
 .laser {
     position: absolute;
-    width: 4px;
-    height: 20px;
+    width: 2px;
+    height: 10px;
     background-color: red;
 }
 /* Controls panel */
