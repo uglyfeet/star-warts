@@ -38,7 +38,7 @@ body {
 
 /* Fire button */
 #fire-button {
-    width: 30%;
+    width: 25%;
     height: 40px;
 
     display: flex;
@@ -54,7 +54,7 @@ body {
 
 /* Movement area */
 #move-area {
-    width: 65%;
+    width: 45%;
     height: 40px;
 
     display: flex;
