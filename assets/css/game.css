@@ -55,7 +55,7 @@ body {
 /* Movement area */
 #move-area {
     width: 65%;
-    height: 50px;
+    height: 40px;
 
     display: flex;
     justify-content: space-around;
