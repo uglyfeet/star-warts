@@ -39,7 +39,7 @@ body {
 /* Fire button */
 #fire-button {
     width: 30%;
-    height: 50px;
+    height: 40px;
 
     display: flex;
     justify-content: center;
