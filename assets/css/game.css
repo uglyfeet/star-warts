@@ -25,11 +25,46 @@ body {
     height: 10px;
     background-color: red;
 }
-/* Controls panel */
+
+/* Touch controls panel */
 #controls-panel {
-    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
     padding: 10px;
-    border-top: 2px solid var(--accent-colour);
+}
+
+/* Fire button */
+#fire-button {
+    width: 30%;
+    height: 50px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border: 2px solid #00ff00;
+    color: #00ff00;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Movement area */
+#move-area {
+    width: 65%;
+    height: 50px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    border: 2px solid #00ff00;
+    color: #00ff00;
+
+    font-size: 1.5rem;
 }
 
 /* Player ship */
