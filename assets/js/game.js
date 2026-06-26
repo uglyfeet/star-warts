@@ -1,7 +1,31 @@
-/* This code is responsible for handling the movement of the player character in the game. It listens for keydown events and moves the player left or right based on the arrow keys pressed. 
-The player's position is updated accordingly, and it ensures that the player does not move outside the boundaries of the game board. */
+/* ===================================================
+   Star Warts - Game Logic
+
+   This file controls:
+
+   - Player movement
+   - Keyboard controls
+   - Touch controls
+   - Laser creation
+   - Game loop
+
+   Author: Tony Welch
+=================================================== */
+
+
+
+/* =========================================
+   Game Objects
+========================================= */
+
+/* Get references to the main game elements used throughout the game. */
 const player = document.getElementById("player");
 const gameBoard = document.getElementById("game-board");
+
+
+/* =========================================
+   Player State
+========================================= */
 
 let playerPosition =
     (gameBoard.clientWidth - player.offsetWidth) / 2;
@@ -11,13 +35,12 @@ player.style.left = playerPosition + "px";
 let movingLeft = false;   /* These variables are used to track whether the player is currently moving left or right and allow for holding the button down whilst firing */
 let movingRight = false;
 
-const fireButton = document.getElementById("fire-button");
-fireButton.addEventListener("click", function() {
 
-    fireLaser();
 
-});
 
+/* =========================================
+   Game Functions
+========================================= */
 /* This function creates a new laser element and animates it moving upwards from the player's position. The laser is represented by a div element with the class "laser". 
 The laser's position is updated every 30 milliseconds, moving it upwards by increasing its bottom position. 
 If the laser goes beyond the game board's height, it is removed from the DOM, and the interval is cleared to stop further movement. */
@@ -80,6 +103,21 @@ document.addEventListener("keydown", function(event) {
     }
 });
 
+
+/* =========================================
+   Touch Controls
+========================================= */
+const fireButton = document.getElementById("fire-button");
+fireButton.addEventListener("click", function() {
+
+    fireLaser();
+
+});
+
+
+/* =========================================
+   Game Loop
+========================================= */
 /* This setInterval function continuously checks the movement flags (movingLeft and movingRight) and updates the player's position accordingly. 
 It ensures that the player does not move outside the boundaries of the game board by checking the player's position against the minimum and maximum allowed values. 
 The player's position is updated every 20 milliseconds, creating smooth movement when the arrow keys are held down. */
