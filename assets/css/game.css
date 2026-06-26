@@ -26,7 +26,7 @@ body {
     background-color: red;
 }
 
-/* Touch controls panel */
+/* Touch controls panel. */
 #controls-panel {
     display: flex;
     justify-content: space-between;
