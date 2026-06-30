@@ -116,7 +116,23 @@ fireButton.addEventListener("click", function() {
 
 moveArea.addEventListener("touchstart", function(event) {
 
-    console.log("Movement area touched");
+    const touchX = event.touches[0].clientX;
+
+    const moveAreaLeft = moveArea.getBoundingClientRect().left;
+
+    const moveAreaWidth = moveArea.offsetWidth;
+
+   if (touchX < moveAreaLeft + moveAreaWidth / 2) {
+
+    movingLeft = true;
+    movingRight = false;
+
+} else {
+
+    movingRight = true;
+    movingLeft = false;
+
+}
 
 });
 
