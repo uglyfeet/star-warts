@@ -21,7 +21,7 @@
 /* Get references to the main game elements used throughout the game. */
 const player = document.getElementById("player");
 const gameBoard = document.getElementById("game-board");
-
+const moveArea = document.getElementById("move-area");
 
 /* =========================================
    Player State
@@ -114,6 +114,11 @@ fireButton.addEventListener("click", function() {
 
 });
 
+moveArea.addEventListener("touchstart", function(event) {
+
+    console.log("Movement area touched");
+
+});
 
 /* =========================================
    Game Loop
