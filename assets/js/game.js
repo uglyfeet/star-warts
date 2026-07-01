@@ -22,6 +22,22 @@
 const player = document.getElementById("player");
 const gameBoard = document.getElementById("game-board");
 const moveArea = document.getElementById("move-area");
+const controlsPanel = document.getElementById("controls-panel");
+const keyboardControls = document.getElementById("keyboard-controls");
+
+/* =========================================
+   Device Detection
+========================================= */
+
+if ("ontouchstart" in window) {
+
+    keyboardControls.style.display = "none";
+
+} else {
+
+    controlsPanel.style.display = "none";
+
+}
 
 /* =========================================
    Player State
@@ -133,6 +149,13 @@ moveArea.addEventListener("touchstart", function(event) {
     movingLeft = false;
 
 }
+
+});
+
+moveArea.addEventListener("touchend", function() {
+
+    movingLeft = false;
+    movingRight = false;
 
 });
 

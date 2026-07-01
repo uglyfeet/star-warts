@@ -112,3 +112,16 @@ body {
     font-size: 1.5rem;
 }
 
+#keyboard-controls {
+
+    text-align: center;
+    color: #00ff00;
+    background: black;
+    border: 2px solid #00ff00;
+    padding: 12px;
+    font-weight: bold;
+    margin: 0 auto;
+    max-width: 500px;
+    margin-top: 10px;
+
+}
