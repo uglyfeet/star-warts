@@ -69,6 +69,23 @@ body {
     background-color: red;
 }
 
+/* =========================================
+   Aliens
+========================================= */
+
+.alien {
+
+    position: absolute;
+
+}
+
+.alien img {
+
+    width: 35px;
+    height: auto;
+
+}
+
 
 /* =========================================
    Touch Controls

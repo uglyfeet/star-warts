@@ -40,16 +40,31 @@ if ("ontouchstart" in window) {
 }
 
 /* =========================================
-   Player State
+   Game Variables
 ========================================= */
+
+/* Player */
 
 let playerPosition =
     (gameBoard.clientWidth - player.offsetWidth) / 2;
 
 player.style.left = playerPosition + "px";
 
-let movingLeft = false;   /* These variables are used to track whether the player is currently moving left or right and allow for holding the button down whilst firing */
+let movingLeft = false;
 let movingRight = false;
+
+
+/* Game */
+
+let currentLevel = 1;
+
+let alienRows = 2;
+
+let alienColumns = 3;
+
+let alienSpeed = 2;
+
+let alienImageIndex = 0;
 
 
 
@@ -161,6 +176,33 @@ moveArea.addEventListener("touchend", function() {
     movingRight = false;
 
 });
+
+
+/* =========================================
+   Alien System
+========================================= */
+
+const alienImages = [
+
+    "assets/images/feet-sunglasses.png",
+    "assets/images/feet-annoyed.png",
+    "assets/images/feet-sad.png",
+    "assets/images/feet-crying.png"
+
+];
+
+function createAlien(left, top) {
+    const alien = document.createElement("div");
+    const alienImage = document.createElement("img");
+    alienImage.src = alienImages[alienImageIndex];
+    alien.appendChild(alienImage);
+    alien.classList.add("alien");
+    alien.style.left = left + "px";
+    alien.style.top = top + "px";
+    gameBoard.appendChild(alien);
+}
+
+createAlien(0, 20);
 
 /* =========================================
    Game Loop
