@@ -125,9 +125,12 @@ document.addEventListener("keydown", function(event) {
 ========================================= */
 const fireButton = document.getElementById("fire-button");
 fireButton.addEventListener("click", function() {
-
     fireLaser();
+});
 
+fireButton.addEventListener("touchstart", function(event) {
+    event.preventDefault();
+    fireLaser();
 });
 
 moveArea.addEventListener("touchstart", function(event) {
