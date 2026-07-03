@@ -55,12 +55,21 @@ let movingRight = false;
 let currentLevel = 1;
 let alienRows = 2;
 let alienColumns = 3;
-let alienSpeed = 2;
+let alienSpeed = 8;
 let alienImageIndex = 0;
 let fleetLeft = 0;
 let fleetTop = 20;
 let fleetDirection = 1;
+let fleetCounter = 0;
+let fleetStepDelay = 20;
 let alienFleet = [];
+
+/* Alien layout - size and spacing */
+const alienSpacingX = 50;
+const alienSpacingY = 50;
+const alienWidth = 35;
+
+
 
 /* =========================================
    Player System
@@ -183,7 +192,7 @@ const alienImages = [
 /* this function creates a new alien element at the specified left and top positions. The alien is represented by a div element with the class "alien" and contains an img element displaying one of the alien images. 
 The alien is then added to the game board and stored in the alienFleet array for later reference. */
 
-function createAlien(left, top) {
+function createAlien(left, top, row, column)  {
     const alien = document.createElement("div");
     const alienImage = document.createElement("img");
     alienImage.src = alienImages[alienImageIndex];
@@ -191,15 +200,41 @@ function createAlien(left, top) {
     alien.classList.add("alien");
     alien.style.left = left + "px";
     alien.style.top = top + "px";
+    alien.dataset.row = row;
+    alien.dataset.column = column;
     gameBoard.appendChild(alien);
     alienFleet.push(alien);
 }
 
-/* this function moves the entire fleet of aliens to the right by increasing the fleetLeft variable by the alienSpeed value. */
-
-function moveFleet() {
-    fleetLeft += alienSpeed;
+/* The fleetDirection variable determines the direction of movement (1 for right, -1 for left). */
+function moveFleetStep() {
+    fleetLeft += alienSpeed * fleetDirection;
 }
+
+/* this function updates the position of each alien in the alienFleet array based on the current fleetLeft and fleetTop values. Each alien's left and top styles are set according to its row and column index, multiplied by the specified spacing values (alienSpacingX and alienSpacingY). 
+This ensures that the aliens maintain their grid formation as they move across the game board. */
+function updateFleetPosition() {
+    alienFleet.forEach(function(alien) {
+        const row = Number(alien.dataset.row);
+        const column = Number(alien.dataset.column);
+        alien.style.left = fleetLeft + (column * alienSpacingX) + "px";
+        alien.style.top = fleetTop + (row * alienSpacingY) + "px";
+    });
+}
+
+/* this function checks if the alien fleet has reached the edges of the game board. If the fleet reaches the right edge, the fleetDirection is set to -1 (moving left), and the fleetTop is increased by alienSpacingY to move the fleet down. */
+function checkFleetEdges() {
+    const fleetWidth = (alienColumns - 1) * alienSpacingX + alienWidth;
+    if (fleetLeft + fleetWidth >= gameBoard.clientWidth) {
+        fleetDirection = -1;
+        fleetTop += alienSpacingY;
+    }
+    if (fleetLeft <= 0) {
+        fleetDirection = 1;
+        fleetTop += alienSpacingY;
+    }
+}
+
 
 /* Alien Initialisation */
 /* this loop creates a grid of aliens based on the specified number of rows and columns. Each alien is positioned based on its row and column index, with a horizontal spacing of 30 pixels and a vertical spacing of 50 pixels. 
@@ -208,11 +243,14 @@ The fleetLeft and fleetTop variables determine the starting position of the alie
 for (let row = 0; row < alienRows; row++) {
     for (let column = 0; column < alienColumns; column++) {
         createAlien(
-        fleetLeft + (column * 30),
-        fleetTop + (row * 50)
+            fleetLeft + (column * alienSpacingX),
+            fleetTop + (row * alienSpacingY),
+            row,
+            column
         );
     }
 }
+
 
 /* =========================================
    Game Loop
@@ -222,6 +260,13 @@ It ensures that the player does not move outside the boundaries of the game boar
 The player's position is updated every 20 milliseconds, creating smooth movement when the arrow keys are held down. */
 
 setInterval(function() {
+    fleetCounter++;
+    if (fleetCounter >= fleetStepDelay) {
+        moveFleetStep();
+        updateFleetPosition();
+        fleetCounter = 0;
+        checkFleetEdges();
+    }
     if (movingLeft) {
         playerPosition -= 5;
         if (playerPosition < -10) {
