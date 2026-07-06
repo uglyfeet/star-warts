@@ -188,7 +188,7 @@ main {
 /* Small screens and up */
 @media screen and (min-width: 576px) {
 #scroller {
-	font-size: 275;
+	font-size: 275%;
 }
 #subtitle {
 	font-size: 3rem;

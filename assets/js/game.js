@@ -69,8 +69,8 @@ let lasers = [];
 const alienSpacingX = 50;
 const alienSpacingY = 50;
 const alienWidth = 35;
-
-
+let gameOver = false;
+let score = 0;
 
 /* =========================================
    Player System
@@ -89,7 +89,7 @@ function fireLaser() {
     element: laser,
     x: playerPosition + player.offsetWidth / 2,
     y: 60,
-    speed: 10
+    speed: 3
     };
     lasers.push(laserData);
 }
@@ -122,19 +122,28 @@ function checkLaserCollisions() {
 
             const currentAlien = alienFleet[alienIndex];
 
-            const alienLeft = parseInt(currentAlien.element.style.left);
-            const alienTop = parseInt(currentAlien.element.style.top);
+            const alienLeft = currentAlien.x;
+            const alienTop = currentAlien.y;
 
             const laserLeft = currentLaser.x;
-            const laserBottom = currentLaser.y;
+            const laserTop = gameBoard.clientHeight - currentLaser.y;
 
             if (
                 laserLeft >= alienLeft &&
                 laserLeft <= alienLeft + alienWidth &&
-                laserBottom >= alienTop &&
-                laserBottom <= alienTop + alienWidth
+                laserTop >= alienTop &&
+                laserTop <= alienTop + alienWidth
             ) {
-                console.log("Hit!");
+currentAlien.element.remove();
+alienFleet.splice(alienIndex, 1);
+
+score += 100;
+updateScore();
+
+currentLaser.element.remove();
+lasers.splice(laserIndex, 1);
+
+break;
             }
 
         }
@@ -142,6 +151,18 @@ function checkLaserCollisions() {
     }
 
 }
+
+function checkWin() {
+
+    if (alienFleet.length === 0) {
+        gameOver = true;
+        alert("You Win!");
+    }
+
+}
+
+
+
 /* this function listens for keyup events and stops the player's movement when the arrow keys are released. 
 When the left or right arrow key is released, the corresponding movingLeft or movingRight variable is set to false, 
 which will stop the player's movement in that direction. */
@@ -266,10 +287,14 @@ function moveFleetStep() {
 This ensures that the aliens maintain their grid formation as they move across the game board. */
 function updateFleetPosition() {
     alienFleet.forEach(function(currentAlien) {
-    const row = currentAlien.row;
-    const column = currentAlien.column;
-    currentAlien.element.style.left = fleetLeft + (column * alienSpacingX) + "px";
-    currentAlien.element.style.top = fleetTop + (row * alienSpacingY) + "px";
+        const row = currentAlien.row;
+        const column = currentAlien.column;
+        const newX = fleetLeft + (column * alienSpacingX);
+        const newY = fleetTop + (row * alienSpacingY);
+        currentAlien.x = newX;
+        currentAlien.y = newY;
+        currentAlien.element.style.left = newX + "px";
+        currentAlien.element.style.top = newY + "px";
     });
 }
 
@@ -310,9 +335,20 @@ for (let row = 0; row < alienRows; row++) {
 It ensures that the player does not move outside the boundaries of the game board by checking the player's position against the minimum and maximum allowed values. 
 The player's position is updated every 20 milliseconds, creating smooth movement when the arrow keys are held down. */
 
+
+function updateScore() {
+    const scoreElement = document.getElementById("score-display");
+    scoreElement.textContent = "Score: " + score + " | Lives: 3";
+}
+
+
 setInterval(function() {
+    if (gameOver) {
+    return;
+}
     moveLasers();
     checkLaserCollisions();
+    checkWin();
     fleetCounter++;
     if (fleetCounter >= fleetStepDelay) {
         moveFleetStep();
