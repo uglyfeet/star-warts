@@ -154,11 +154,40 @@ break;
 
 function checkWin() {
 
+
     if (alienFleet.length === 0) {
-        gameOver = true;
-        alert("You Win!");
+        nextLevel();
     }
 
+}
+
+function nextLevel() {
+
+    currentLevel++;
+    alienRows++;
+    alienColumns++;
+    alienSpeed += 3;
+    alienImageIndex++;
+
+    if (alienImageIndex >= alienImages.length) {
+        alienImageIndex = 0;
+    }
+    fleetLeft = 0;
+    fleetTop = 20;
+    fleetDirection = 1;
+    fleetCounter = 0;
+    alienFleet = [];
+
+for (let row = 0; row < alienRows; row++) {
+    for (let column = 0; column < alienColumns; column++) {
+        createAlien(
+            fleetLeft + (column * alienSpacingX),
+            fleetTop + (row * alienSpacingY),
+            row,
+            column
+        );
+    }
+}
 }
 
 
@@ -312,6 +341,18 @@ function checkFleetEdges() {
 }
 
 
+function checkGameOver() {
+
+    const fleetHeight = (alienRows - 1) * alienSpacingY + alienWidth;
+
+    if (fleetTop + fleetHeight >= gameBoard.clientHeight - 30) {
+        gameOver = true;
+        document.getElementById("game-over-message").style.display = "block";
+    }
+
+}
+
+
 /* Alien Initialisation */
 /* this loop creates a grid of aliens based on the specified number of rows and columns. Each alien is positioned based on its row and column index, with a horizontal spacing of 30 pixels and a vertical spacing of 50 pixels. 
 The fleetLeft and fleetTop variables determine the starting position of the alien fleet on the game board. */
@@ -355,6 +396,7 @@ setInterval(function() {
         updateFleetPosition();
         fleetCounter = 0;
         checkFleetEdges();
+        checkGameOver();
     }
     if (movingLeft) {
         playerPosition -= 5;
