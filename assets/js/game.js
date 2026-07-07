@@ -9,10 +9,7 @@
    - Laser creation
    - Game loop
 
-   Author: Tony Welch
 =================================================== */
-
-
 
 /* =========================================
    Game Objects
@@ -33,9 +30,9 @@ const keyboardControls = document.getElementById("keyboard-controls");
 If the device does not support touch events, the touch controls panel is hidden. */
 
 if ("ontouchstart" in window) {
-    keyboardControls.style.display = "none";
+  keyboardControls.style.display = "none";
 } else {
-    controlsPanel.style.display = "none";
+  controlsPanel.style.display = "none";
 }
 
 /* =========================================
@@ -48,7 +45,6 @@ let playerPosition = (gameBoard.clientWidth - player.offsetWidth) / 2;
 player.style.left = playerPosition + "px";
 let movingLeft = false;
 let movingRight = false;
-
 
 /* Game */
 
@@ -80,20 +76,19 @@ The laser's position is updated every 30 milliseconds, moving it upwards by incr
 If the laser goes beyond the game board's height, it is removed from the DOM, and the interval is cleared to stop further movement. */
 
 function fireLaser() {
-    const laser = document.createElement("div");
-    laser.classList.add("laser");
-    laser.style.left = (playerPosition + player.offsetWidth / 2) + "px";
-    laser.style.bottom = "60px";
-    gameBoard.appendChild(laser);
-    const laserData = {
+  const laser = document.createElement("div");
+  laser.classList.add("laser");
+  laser.style.left = playerPosition + player.offsetWidth / 2 + "px";
+  laser.style.bottom = "60px";
+  gameBoard.appendChild(laser);
+  const laserData = {
     element: laser,
     x: playerPosition + player.offsetWidth / 2,
     y: 60,
-    speed: 3
-    };
-    lasers.push(laserData);
+    speed: 3,
+  };
+  lasers.push(laserData);
 }
-
 
 /* Moves every laser currently on the screen.
 Each laser stores its own position in the lasers array.
@@ -101,173 +96,153 @@ If a laser leaves the top of the game board, it is removed
 from both the DOM and the lasers array. */
 
 function moveLasers() {
-    for (let laserIndex = lasers.length - 1; laserIndex >= 0; laserIndex--) {
-        const currentLaser = lasers[laserIndex];
-        currentLaser.y += currentLaser.speed;
-        currentLaser.element.style.bottom = currentLaser.y + "px";
-        if (currentLaser.y > gameBoard.clientHeight) {
-            currentLaser.element.remove();
-            lasers.splice(laserIndex, 1);
-        }
+  for (let laserIndex = lasers.length - 1; laserIndex >= 0; laserIndex--) {
+    const currentLaser = lasers[laserIndex];
+    currentLaser.y += currentLaser.speed;
+    currentLaser.element.style.bottom = currentLaser.y + "px";
+    if (currentLaser.y > gameBoard.clientHeight) {
+      currentLaser.element.remove();
+      lasers.splice(laserIndex, 1);
     }
+  }
 }
 
 function checkLaserCollisions() {
-
-    for (let laserIndex = lasers.length - 1; laserIndex >= 0; laserIndex--) {
-
-        const currentLaser = lasers[laserIndex];
-
-        for (let alienIndex = alienFleet.length - 1; alienIndex >= 0; alienIndex--) {
-
-            const currentAlien = alienFleet[alienIndex];
-
-            const alienLeft = currentAlien.x;
-            const alienTop = currentAlien.y;
-
-            const laserLeft = currentLaser.x;
-            const laserTop = gameBoard.clientHeight - currentLaser.y;
-
-            if (
-                laserLeft >= alienLeft &&
-                laserLeft <= alienLeft + alienWidth &&
-                laserTop >= alienTop &&
-                laserTop <= alienTop + alienWidth
-            ) {
-currentAlien.element.remove();
-alienFleet.splice(alienIndex, 1);
-
-score += 100;
-updateScore();
-
-currentLaser.element.remove();
-lasers.splice(laserIndex, 1);
-
-break;
-            }
-
-        }
-
+  for (let laserIndex = lasers.length - 1; laserIndex >= 0; laserIndex--) {
+    const currentLaser = lasers[laserIndex];
+    for (
+      let alienIndex = alienFleet.length - 1;
+      alienIndex >= 0;
+      alienIndex--
+    ) {
+      const currentAlien = alienFleet[alienIndex];
+      const alienLeft = currentAlien.x;
+      const alienTop = currentAlien.y;
+      const laserLeft = currentLaser.x;
+      const laserTop = gameBoard.clientHeight - currentLaser.y;
+      if (
+        laserLeft >= alienLeft &&
+        laserLeft <= alienLeft + alienWidth &&
+        laserTop >= alienTop &&
+        laserTop <= alienTop + alienWidth
+      ) {
+        currentAlien.element.remove();
+        alienFleet.splice(alienIndex, 1);
+        score += 100;
+        updateScore();
+        currentLaser.element.remove();
+        lasers.splice(laserIndex, 1);
+        break;
+      }
     }
-
+  }
 }
 
 function checkWin() {
-
-
-    if (alienFleet.length === 0) {
-        nextLevel();
-    }
-
+  if (alienFleet.length === 0) {
+    nextLevel();
+  }
 }
 
 function nextLevel() {
-
-    currentLevel++;
-    alienRows++;
-    alienColumns++;
-    alienSpeed += 3;
-    alienImageIndex++;
-
-    if (alienImageIndex >= alienImages.length) {
-        alienImageIndex = 0;
-    }
-    fleetLeft = 0;
-    fleetTop = 20;
-    fleetDirection = 1;
-    fleetCounter = 0;
-    alienFleet = [];
-
-for (let row = 0; row < alienRows; row++) {
+  currentLevel++;
+  alienRows++;
+  alienColumns++;
+  alienSpeed += 3;
+  alienImageIndex++;
+  if (alienImageIndex >= alienImages.length) {
+    alienImageIndex = 0;
+  }
+  fleetLeft = 0;
+  fleetTop = 20;
+  fleetDirection = 1;
+  fleetCounter = 0;
+  alienFleet = [];
+  for (let row = 0; row < alienRows; row++) {
     for (let column = 0; column < alienColumns; column++) {
-        createAlien(
-            fleetLeft + (column * alienSpacingX),
-            fleetTop + (row * alienSpacingY),
-            row,
-            column
-        );
+      createAlien(
+        fleetLeft + column * alienSpacingX,
+        fleetTop + row * alienSpacingY,
+        row,
+        column,
+      );
     }
+  }
 }
-}
-
-
 
 /* this function listens for keyup events and stops the player's movement when the arrow keys are released. 
 When the left or right arrow key is released, the corresponding movingLeft or movingRight variable is set to false, 
 which will stop the player's movement in that direction. */
 
-document.addEventListener("keyup", function(event) {
-    if (event.key === "ArrowLeft") {
-        movingLeft = false;
-    }
-    if (event.key === "ArrowRight") {
-        movingRight = false;
-    }
+document.addEventListener("keyup", function (event) {
+  if (event.key === "ArrowLeft") {
+    movingLeft = false;
+  }
+  if (event.key === "ArrowRight") {
+    movingRight = false;
+  }
 });
 
 /* this function listens for keydown events and moves the player left or right 
 based on the arrow keys pressed. It also ensures that the player does not move outside 
 the boundaries of the game board. */
 
-document.addEventListener("keydown", function(event) {     
-    if (event.key === "ArrowLeft") {
-        movingLeft = true;
-    }
-    if (event.key === "ArrowRight") {
-        movingRight = true;
-    }
+document.addEventListener("keydown", function (event) {
+  if (event.key === "ArrowLeft") {
+    movingLeft = true;
+  }
+  if (event.key === "ArrowRight") {
+    movingRight = true;
+  }
 
-
-    /* Creates a new laser when the player presses Space.
+  /* Creates a new laser when the player presses Space.
     The event.repeat check prevents continuous firing when the
     Space Bar is held down.
     A new div element is created, assigned the laser CSS class,
     and added to the game board so it becomes visible.*/
-    
-    if (event.key === " " && !event.repeat) {
-        fireLaser();
-    }
-});
 
+  if (event.key === " " && !event.repeat) {
+    fireLaser();
+  }
+});
 
 /* =========================================
    Touch Controls
 ========================================= */
 const fireButton = document.getElementById("fire-button");
-fireButton.addEventListener("click", function() {
-    fireLaser();
+fireButton.addEventListener("click", function () {
+  fireLaser();
 });
 
-fireButton.addEventListener("touchstart", function(event) {
-    event.preventDefault();
-    fireLaser();
+fireButton.addEventListener("touchstart", function (event) {
+  event.preventDefault();
+  fireLaser();
 });
 
 /* this function listens for touchstart events on the moveArea element and determines whether the player should move left or right based on the touch position.
 If the touch position is on the left half of the moveArea, the player will move left. If it's on the right half, the player will move right. 
 The movingLeft and movingRight variables are set accordingly to control the player's movement. */
 
-moveArea.addEventListener("touchstart", function(event) {
-    const touchX = event.touches[0].clientX;
-    const moveAreaLeft = moveArea.getBoundingClientRect().left;
-    const moveAreaWidth = moveArea.offsetWidth;
-    if (touchX < moveAreaLeft + moveAreaWidth / 2) {
-        movingLeft = true;
-        movingRight = false;
-    } else {
-        movingRight = true;
-        movingLeft = false;
-    }
+moveArea.addEventListener("touchstart", function (event) {
+  const touchX = event.touches[0].clientX;
+  const moveAreaLeft = moveArea.getBoundingClientRect().left;
+  const moveAreaWidth = moveArea.offsetWidth;
+  if (touchX < moveAreaLeft + moveAreaWidth / 2) {
+    movingLeft = true;
+    movingRight = false;
+  } else {
+    movingRight = true;
+    movingLeft = false;
+  }
 });
 
 /* this function listens for touchend events on the moveArea element and stops the player's movement when the touch ends.
 When the touch ends, both movingLeft and movingRight variables are set to false, which will stop the player's movement in either direction. */
 
-moveArea.addEventListener("touchend", function() {
-    movingLeft = false;
-    movingRight = false;
+moveArea.addEventListener("touchend", function () {
+  movingLeft = false;
+  movingRight = false;
 });
-
 
 /* =========================================
    Alien System
@@ -275,99 +250,93 @@ moveArea.addEventListener("touchend", function() {
 
 /* Alien Images */
 const alienImages = [
-    "assets/images/feet-sunglasses.png",
-    "assets/images/feet-annoyed.png",
-    "assets/images/feet-sad.png",
-    "assets/images/feet-crying.png"
+  "assets/images/feet-sunglasses.png",
+  "assets/images/feet-annoyed.png",
+  "assets/images/feet-sad.png",
+  "assets/images/feet-crying.png",
 ];
 
 /* Alien Functions */
 /* this function creates a new alien element at the specified left and top positions. The alien is represented by a div element with the class "alien" and contains an img element displaying one of the alien images. 
 The alien is then added to the game board and stored in the alienFleet array for later reference. */
 
-function createAlien(left, top, row, column)  {
-    const alien = document.createElement("div");
-    const alienImage = document.createElement("img");
-    alienImage.src = alienImages[alienImageIndex];
-    alien.appendChild(alienImage);
-    alien.classList.add("alien");
-    alien.style.left = left + "px";
-    alien.style.top = top + "px";
-    alien.dataset.row = row;
-    alien.dataset.column = column;
-    gameBoard.appendChild(alien);
-    const alienData = {
-        element: alien,
-        row: row,
-        column: column,
-        x: left,
-        y: top,
-        alive: true
-    };
-    alienFleet.push(alienData);
+function createAlien(left, top, row, column) {
+  const alien = document.createElement("div");
+  const alienImage = document.createElement("img");
+  alienImage.src = alienImages[alienImageIndex];
+  alien.appendChild(alienImage);
+  alien.classList.add("alien");
+  alien.style.left = left + "px";
+  alien.style.top = top + "px";
+  alien.dataset.row = row;
+  alien.dataset.column = column;
+  gameBoard.appendChild(alien);
+  const alienData = {
+    element: alien,
+    row: row,
+    column: column,
+    x: left,
+    y: top,
+    alive: true,
+  };
+  alienFleet.push(alienData);
 }
 
 /* The fleetDirection variable determines the direction of movement (1 for right, -1 for left). */
 function moveFleetStep() {
-    fleetLeft += alienSpeed * fleetDirection;
+  fleetLeft += alienSpeed * fleetDirection;
 }
 
 /* this function updates the position of each alien in the alienFleet array based on the current fleetLeft and fleetTop values. Each alien's left and top styles are set according to its row and column index, multiplied by the specified spacing values (alienSpacingX and alienSpacingY). 
 This ensures that the aliens maintain their grid formation as they move across the game board. */
 function updateFleetPosition() {
-    alienFleet.forEach(function(currentAlien) {
-        const row = currentAlien.row;
-        const column = currentAlien.column;
-        const newX = fleetLeft + (column * alienSpacingX);
-        const newY = fleetTop + (row * alienSpacingY);
-        currentAlien.x = newX;
-        currentAlien.y = newY;
-        currentAlien.element.style.left = newX + "px";
-        currentAlien.element.style.top = newY + "px";
-    });
+  alienFleet.forEach(function (currentAlien) {
+    const row = currentAlien.row;
+    const column = currentAlien.column;
+    const newX = fleetLeft + column * alienSpacingX;
+    const newY = fleetTop + row * alienSpacingY;
+    currentAlien.x = newX;
+    currentAlien.y = newY;
+    currentAlien.element.style.left = newX + "px";
+    currentAlien.element.style.top = newY + "px";
+  });
 }
 
 /* this function checks if the alien fleet has reached the edges of the game board. If the fleet reaches the right edge, the fleetDirection is set to -1 (moving left), and the fleetTop is increased by alienSpacingY to move the fleet down. */
 function checkFleetEdges() {
-    const fleetWidth = (alienColumns - 1) * alienSpacingX + alienWidth;
-    if (fleetLeft + fleetWidth >= gameBoard.clientWidth) {
-        fleetDirection = -1;
-        fleetTop += alienSpacingY;
-    }
-    if (fleetLeft <= 0) {
-        fleetDirection = 1;
-        fleetTop += alienSpacingY;
-    }
+  const fleetWidth = (alienColumns - 1) * alienSpacingX + alienWidth;
+  if (fleetLeft + fleetWidth >= gameBoard.clientWidth) {
+    fleetDirection = -1;
+    fleetTop += alienSpacingY;
+  }
+  if (fleetLeft <= 0) {
+    fleetDirection = 1;
+    fleetTop += alienSpacingY;
+  }
 }
-
 
 function checkGameOver() {
-
-    const fleetHeight = (alienRows - 1) * alienSpacingY + alienWidth;
-
-    if (fleetTop + fleetHeight >= gameBoard.clientHeight - 30) {
-        gameOver = true;
-        document.getElementById("game-over-message").style.display = "block";
-    }
-
+  const fleetHeight = (alienRows - 1) * alienSpacingY + alienWidth;
+  if (fleetTop + fleetHeight >= gameBoard.clientHeight - 30) {
+    gameOver = true;
+    document.getElementById("game-over-message").style.display = "block";
+  }
 }
-
 
 /* Alien Initialisation */
 /* this loop creates a grid of aliens based on the specified number of rows and columns. Each alien is positioned based on its row and column index, with a horizontal spacing of 30 pixels and a vertical spacing of 50 pixels. 
 The fleetLeft and fleetTop variables determine the starting position of the alien fleet on the game board. */
 
 for (let row = 0; row < alienRows; row++) {
-    for (let column = 0; column < alienColumns; column++) {
-        createAlien(
-            fleetLeft + (column * alienSpacingX),
-            fleetTop + (row * alienSpacingY),
-            row,
-            column
-        );
-    }
+  for (let column = 0; column < alienColumns; column++) {
+    createAlien(
+      fleetLeft + column * alienSpacingX,
+      fleetTop + row * alienSpacingY,
+      row,
+      column,
+    );
+  }
 }
-
 
 /* =========================================
    Game Loop
@@ -376,43 +345,39 @@ for (let row = 0; row < alienRows; row++) {
 It ensures that the player does not move outside the boundaries of the game board by checking the player's position against the minimum and maximum allowed values. 
 The player's position is updated every 20 milliseconds, creating smooth movement when the arrow keys are held down. */
 
-
 function updateScore() {
-    const scoreElement = document.getElementById("score-display");
-    scoreElement.textContent = "Score: " + score + " | Lives: 3";
+  const scoreElement = document.getElementById("score-display");
+  scoreElement.textContent = "Score: " + score + " | Lives: 3";
 }
 
-
-setInterval(function() {
-    if (gameOver) {
+setInterval(function () {
+  if (gameOver) {
     return;
-}
-    moveLasers();
-    checkLaserCollisions();
-    checkWin();
-    fleetCounter++;
-    if (fleetCounter >= fleetStepDelay) {
-        moveFleetStep();
-        updateFleetPosition();
-        fleetCounter = 0;
-        checkFleetEdges();
-        checkGameOver();
+  }
+  moveLasers();
+  checkLaserCollisions();
+  checkWin();
+  fleetCounter++;
+  if (fleetCounter >= fleetStepDelay) {
+    moveFleetStep();
+    updateFleetPosition();
+    fleetCounter = 0;
+    checkFleetEdges();
+    checkGameOver();
+  }
+  if (movingLeft) {
+    playerPosition -= 5;
+    if (playerPosition < -10) {
+      playerPosition = -10;
     }
-    if (movingLeft) {
-        playerPosition -= 5;
-        if (playerPosition < -10) {
-            playerPosition = -10;
-        }
-        player.style.left = playerPosition + "px";
+    player.style.left = playerPosition + "px";
+  }
+  if (movingRight) {
+    playerPosition += 5;
+    const maxPosition = gameBoard.clientWidth - player.offsetWidth + 10;
+    if (playerPosition > maxPosition) {
+      playerPosition = maxPosition;
     }
-
-    if (movingRight) {
-        playerPosition += 5;
-        const maxPosition = gameBoard.clientWidth - player.offsetWidth + 10;
-        if (playerPosition > maxPosition) {
-            playerPosition = maxPosition;
-        }
-        player.style.left = playerPosition + "px";
-    }
-
+    player.style.left = playerPosition + "px";
+  }
 }, 20);

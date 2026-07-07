@@ -3,11 +3,11 @@
 /* Importing the Star Wars font from online web fonts */
 @import url(https://db.onlinewebfonts.com/c/c00548f5d217ed324ae9096051927001?family=STARWARS);
 
-/* CSS Variables */ 
+/* CSS Variables */
 :root {
     --primary-font: "STARWARS", sans-serif;
-    --primary-color:black;
-    --secondary-color:white;
+    --primary-color: black;
+    --secondary-color: white;
     --accent-colour: #4bd5ee;
     --story-colour: #ffe81f;
 }
@@ -30,8 +30,9 @@ body {
 }
 
 .navbar-logo {
-	width: 30px;
-} 
+    width: 30px;
+}
+
 .logo-image {
     max-width: 250px;
     width: 100%;

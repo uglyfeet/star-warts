@@ -1,10 +1,9 @@
-
 /* Intro and Scroller */
 body {
 	margin: 0;
 	background-color: var(--primary-color);
 	overflow: hidden;
-    font-family: var(--primary-font);  
+	font-family: var(--primary-font);
 }
 
 /* Gradient overlay */
@@ -15,12 +14,10 @@ body::after {
 	left: 0;
 	width: 100%;
 	height: 80vh;
-	background: linear-gradient(
-		to bottom,
-		rgba(0, 0, 0, 1) 61%,
-		rgba(0, 0, 0, 0.54) 79%,
-		rgba(0, 0, 0, 0) 100%
-	);
+	background: linear-gradient(to bottom,
+			rgba(0, 0, 0, 1) 61%,
+			rgba(0, 0, 0, 0.54) 79%,
+			rgba(0, 0, 0, 0) 100%);
 	z-index: 1;
 }
 
@@ -35,8 +32,8 @@ body::after {
 
 /* Intro text */
 .intro {
-	position: absolute; 
-	top: 50%; 
+	position: absolute;
+	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	z-index: 2;
@@ -54,12 +51,15 @@ body::after {
 	0% {
 		opacity: 0;
 	}
+
 	20% {
 		opacity: 1;
 	}
+
 	90% {
 		opacity: 1;
 	}
+
 	100% {
 		opacity: 0;
 	}
@@ -87,9 +87,11 @@ body::after {
 		opacity: 1;
 		transform: translate(-50%, -50%) scale(2);
 	}
+
 	70% {
 		opacity: 1;
 	}
+
 	100% {
 		opacity: 0;
 		transform: translate(-50%, -50%) scale(0.1);
@@ -97,7 +99,7 @@ body::after {
 }
 
 p {
-    --story-colour: #ffe81f;
+	--story-colour: #ffe81f;
 	color: var(--story-colour);
 }
 
@@ -106,13 +108,13 @@ p {
 	font-family: sans-serif;
 	font-weight: bold;
 	text-align: justify;
-	overflow: hidden; 
+	overflow: hidden;
 	height: 50em;
 	width: 20em;
 	position: absolute;
 	bottom: 0;
- 	left: 50%; 
-	margin-left: -10em; 
+	left: 50%;
+	margin-left: -10em;
 	z-index: 0;
 	transform: perspective(200px) rotateX(25deg);
 	transform-origin: 50% 100%;
@@ -138,6 +140,7 @@ p {
 	0% {
 		top: 100%;
 	}
+
 	100% {
 		top: -200%;
 	}
@@ -156,30 +159,31 @@ p {
 h1,
 h2,
 h3 {
-    font-family: var(--secondary-font);
-    color: var(--primary-color);
+	font-family: var(--secondary-font);
+	color: var(--primary-color);
 }
 
 h1,
 h2 {
-    text-transform: uppercase;
+	text-transform: uppercase;
 }
 
 h2 {
-    margin-bottom: 2rem;
+	margin-bottom: 2rem;
 }
 
 .sub-heading-color {
-    color: var(--highlight-color);
+	color: var(--highlight-color);
 }
 
 main {
-    /* Enlarge main element to push footer down*/
-    flex: 1 0 auto;
+	/* Enlarge main element to push footer down*/
+	flex: 1 0 auto;
 }
 
 .section {
-    padding-top: 4rem; /* prevent navbar overlap */
+	padding-top: 4rem;
+	/* prevent navbar overlap */
 }
 
 
@@ -187,51 +191,56 @@ main {
 
 /* Small screens and up */
 @media screen and (min-width: 576px) {
-#scroller {
-	font-size: 275%;
-}
-#subtitle {
-	font-size: 3rem;
-}
+	#scroller {
+		font-size: 275%;
+	}
+
+	#subtitle {
+		font-size: 3rem;
+	}
 }
 
 /* Medium devices (tablets, 768px and up) */
 @media screen and (min-width: 768px) {
- #scroller {
-	font-size: 350%;
-} 
-#subtitle {
-	font-size: 3rem;
-}  
+	#scroller {
+		font-size: 350%;
+	}
+
+	#subtitle {
+		font-size: 3rem;
+	}
 }
 
 /* Large devices (small laptops, 992px and up) */
 @media screen and (min-width: 992px) {
-#scroller {
-	font-size: 350%;
-} 
-#subtitle {
-	font-size: 3.5rem;
-}  
+	#scroller {
+		font-size: 350%;
+	}
+
+	#subtitle {
+		font-size: 3.5rem;
+	}
 
 }
 
 /* xl devices (large desktops, 1200px and up) */
 @media screen and (min-width: 1200px) {
-#scroller {
-	font-size: 350%;
-}
-#subtitle {
-	font-size: 3.5rem;
-} 
+	#scroller {
+		font-size: 350%;
+	}
+
+	#subtitle {
+		font-size: 3.5rem;
+	}
 }
 
 /* xxl devices (larger desktops, 1400px and up) */
 @media screen and (min-width: 1400px) {
- #scroller {
-	font-size: 350%;
-}
-#subtitle {
-	font-size: 3.5rem;
-}
+	#scroller {
+		font-size: 350%;
+	}
+
+	#subtitle {
+		font-size: 3.5rem;
+	}
 }

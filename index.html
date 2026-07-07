@@ -1,133 +1,144 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <!-- Meta tags for search engines -->
     <meta
       name="description"
-      content="Star Warts, a space themed game where you play as a pilot trying to save the galaxy from the evil Space Feet.">
+      content="Star Warts, a space themed game where you play as a pilot trying to save the galaxy from the evil Space Feet." />
     <meta
       name="keywords"
-      content="space, game, pilot, galaxy, evil, feet, invaders, invading, save, fun, adventure">
-    <title>Star Warts | Mission Briefing </title>
+      content="space, game, pilot, galaxy, evil, feet, invaders, invading, save, fun, adventure" />
+    <title>Star Warts | Mission Briefing</title>
 
     <!--favicon-->
     <link
       rel="apple-touch-icon"
       sizes="180x180"
-      href="assets/favicon/apple-icon-180x180.png">
+      href="assets/favicon/apple-icon-180x180.png" />
     <link
       rel="icon"
       type="image/png"
       sizes="32x32"
-      href="assets/favicon/favicon-32x32.png">
+      href="assets/favicon/favicon-32x32.png" />
     <link
       rel="icon"
       type="image/png"
       sizes="16x16"
-      href="assets/favicon/favicon-16x16.png">
+      href="assets/favicon/favicon-16x16.png" />
 
     <!-- Bootstrap CSS Link -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous" />
 
     <!-- stylesheets -->
-    <link rel="stylesheet" href="assets/css/shared.css">
-    <link rel="stylesheet" href="assets/css/intro.css">
+    <link rel="stylesheet" href="assets/css/shared.css" />
+    <link rel="stylesheet" href="assets/css/intro.css" />
+  </head>
 
-</head>
-
-<body class="d-flex flex-column min-vh-100">
-  <header>
-    <!-- Navigation -->
-    <nav id="navbar" class="navbar navbar-expand-lg fixed-top custom-nav" data-bs-theme="dark">
+  <body class="d-flex flex-column min-vh-100">
+    <header>
+      <!-- Navigation -->
+      <nav
+        id="navbar"
+        class="navbar navbar-expand-lg fixed-top custom-nav"
+        data-bs-theme="dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
-                <img src="assets/favicon/apple-icon-180x180.png" alt="Star Warts logo" class="navbar-logo">
-                <span class="ms-2">Star Warts</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                   <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="index.html">Mission Briefing</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="game.html">Play Game</a>
-                    </li>
- 
-                </ul>
-            </div>
-        </div>
-    </nav>
-  </header>
-
-  <!--main content-->
-  <main>
-    <section id="welcome" class="container section">
-      <h1>Welcome to Star Warts</h1>
-      <div class="row">
-        <div class="col-12 col-xl-6 text-center text-xl-start">
-
-          <!-- first part of the intro appears, stays a while, disappears -->
-          <div class="intro">
-              A long time ago, in a galaxy far, <br>far away....
+          <a class="navbar-brand" href="index.html">
+            <img
+              src="assets/favicon/apple-icon-180x180.png"
+              alt="Star Warts logo"
+              class="navbar-logo" />
+            <span class="ms-2">Star Warts</span>
+          </a>
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html"
+                  >Mission Briefing</a
+                >
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="game.html">Play Game</a>
+              </li>
+            </ul>
           </div>
-
-          <!-- second part of the intro appears after the first part, stays a while, fades-->
-          <div class="logo">
-            <img src="assets/images/star-warts.png" alt="Star Warts Scroll Screen Mockup">
-          </div>
-
-          <!-- third part of the intro. scrolling text. reducing in size. change perspctive to appear like it's going away from the viewer -->
-          <div id="scroller">
-            <div id="content">
-              <p id="title">Episode LXI</p>
-              <br>
-              <p id="subtitle">They're Coming</p>
-              <br>
-              <p>Tony2Toes along with his trusted android companion, C3Ptoe, has vanished as he searches for his mentor, Yoghurt.
-                In his absence, the sinister FIRST ORDER has risen
-                from the ashes of the Empire under Baba Feet and Daft Toenail
-                and will not rest until Tony2Toes
-                has been destroyed.
-
-                With the support of the REPUBLIC,
-                Princess Verruca leads a brave RESISTANCE.
-                She is desperate to find her
-                brother Tony2Toes and gain his
-                help in restoring peace and
-                justice to the galaxy.
-
-                You, our most daring
-                pilot are being sent on a secret mission and join Commander Hammer Toe.
-                Your task is to hold back the advance of the imperial Space Feet. 
-                You must fight your way through the galaxy, defeat the Space Feet and save Tony2Toes before it's too late.  
-                You will be piloting the legendary Starship, Odoureater, and will have to use all your skills to navigate through the treacherous space and defeat the Space Feet.
-                You are our last hope.
-              </p>
-            </div>
-          </div> 
         </div>
-      </div>
-    </section>
-  </main>
+      </nav>
+    </header>
 
+    <!--main content-->
+    <main>
+      <section id="welcome" class="container section">
+        <h1>Welcome to Star Warts</h1>
+        <div class="row">
+          <div class="col-12 col-xl-6 text-center text-xl-start">
+            <!-- first part of the intro appears, stays a while, disappears -->
+            <div class="intro">
+              A long time ago, in a galaxy far, <br />far away....
+            </div>
 
- 
+            <!-- second part of the intro appears after the first part, stays a while, fades-->
+            <div class="logo">
+              <img
+                src="assets/images/star-warts.png"
+                alt="Star Warts Scroll Screen Mockup" />
+            </div>
+
+            <!-- third part of the intro. scrolling text. reducing in size. change perspctive to appear like it's going away from the viewer -->
+            <div id="scroller">
+              <div id="content">
+                <p id="title">Episode LXI</p>
+                <br />
+                <p id="subtitle">They're Coming</p>
+                <br />
+                <p>
+                  Tony2Toes along with his trusted android companion, C3Ptoe,
+                  has vanished as he searches for his mentor, Yoghurt. In his
+                  absence, the sinister FIRST ORDER has risen from the ashes of
+                  the Empire under Baba Feet and Daft Toenail and will not rest
+                  until Tony2Toes has been destroyed. With the support of the
+                  REPUBLIC, Princess Verruca leads a brave RESISTANCE. She is
+                  desperate to find her brother Tony2Toes and gain his help in
+                  restoring peace and justice to the galaxy. You, our most
+                  daring pilot are being sent on a secret mission and join
+                  Commander Hammer Toe. Your task is to hold back the advance of
+                  the imperial Space Feet. You must fight your way through the
+                  galaxy, defeat the Space Feet and save Tony2Toes before it's
+                  too late. You will be piloting the legendary Starship,
+                  Odoureater, and will have to use all your skills to navigate
+                  through the treacherous space and defeat the Space Feet. You
+                  are our last hope.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
 
     <!-- Bootstrap JS Script-->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"></script>
 
     <!-- jave script for the stars -->
     <script src="assets/js/stars.js"></script>
-</body>
+  </body>
 </html>
