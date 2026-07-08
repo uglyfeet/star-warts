@@ -3,11 +3,16 @@
 
    This file controls:
 
-   - Player movement
-   - Keyboard controls
-   - Touch controls
-   - Laser creation
-   - Game loop
+  - Player movement
+  - Keyboard controls
+  - Touch controls
+  - Laser creation and movement
+  - Alien creation and movement
+  - Collision detection
+  - Scoring
+  - Level progression
+  - Game over detection
+  - Game loop
 
 =================================================== */
 
@@ -138,12 +143,19 @@ function checkLaserCollisions() {
   }
 }
 
+/* Updates the player's displayed score after destroying aliens. */
+function updateScore() {
+  const scoreElement = document.getElementById("score-display");
+  scoreElement.textContent = "Score: " + score + " | Lives: 3";
+}
+
 function checkWin() {
   if (alienFleet.length === 0) {
     nextLevel();
   }
 }
 
+/* Increases difficulty and creates the next alien fleet when all aliens are destroyed. */
 function nextLevel() {
   currentLevel++;
   alienRows++;
@@ -343,12 +355,7 @@ for (let row = 0; row < alienRows; row++) {
 ========================================= */
 /* This setInterval function continuously checks the movement flags (movingLeft and movingRight) and updates the player's position accordingly. 
 It ensures that the player does not move outside the boundaries of the game board by checking the player's position against the minimum and maximum allowed values. 
-The player's position is updated every 20 milliseconds, creating smooth movement when the arrow keys are held down. */
-
-function updateScore() {
-  const scoreElement = document.getElementById("score-display");
-  scoreElement.textContent = "Score: " + score + " | Lives: 3";
-}
+The player's position is updated every 20 milliseconds, creating responsive movement when the arrow keys are held down. */
 
 setInterval(function () {
   if (gameOver) {
